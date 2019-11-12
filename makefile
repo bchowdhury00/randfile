@@ -1,9 +1,12 @@
-rand.c:
-	gcc -o test rand.o
-rand.o:
+all: rand.o
+	gcc -o program rand.o
+
+rand.o: rand.c
 	gcc -c rand.c
+
 run:
-	./test
+	./program
+
 clean:
-	rm *~
 	rm *.o
+	rm *~
