@@ -13,23 +13,31 @@ int main(){
     return 0;
   }
   int read1,read2,write1;
-  read1 = read(fD,hold,80);
+  read1 = read(fD,hold,40);
   if (read1 < 0){
     printf("%s\n",strerror(errno));
     return 0;
   }
+  close(fD);
   int fD2 = open("newFile.txt",O_CREAT | O_RDWR,0644);
   if (fD2 < 0){
     printf("%s\n",strerror(errno));
     return 0;
   }
-  write1 = write(fD2,hold,80);
+  write1 = write(fD2,hold,40);
   if (write1 < 0){
     printf("%s\n",strerror(errno));
     return 0;
   }
+  close(fD2);
+  fD2 = open("newFile.txt",O_RDWR,0644);
+  if (fD2 < 0){
+    printf("%s\n",strerror(errno));
+    return 0;
+  }
   int ans[10];
-  read2 = read(fD2,ans,80);
+  
+  read2 = read(fD2,ans,40);
   if (read2 < 0){
     printf("%s\n",strerror(errno));
     return 0;
@@ -44,9 +52,8 @@ int main(){
   for (increment = 0;increment < 10; increment++){
     printf("%d\n",ans[increment]);
   }
-  close(fD);
-  close(fD2);
   return 0;
 }
+
 
 
